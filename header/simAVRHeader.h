@@ -1,7 +1,7 @@
 /* Debug information for SimAVR */
 #include <stdio.h>
 #ifndef F_CPU
-#define F_CPU .
+#define F_CPU 
 #endif
 
 #include <avr/sleep.h>

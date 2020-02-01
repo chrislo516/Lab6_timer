@@ -9,7 +9,6 @@
  */
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include "simAVRHeader.h"
 
 volatile unsigned char TimerFlag = 0; // TimerISR() sets this to 1. Cprogrammer should clear to 0.
 
@@ -123,7 +122,7 @@ void Loop(){
 int main(){
 	DDRB = 0xFF; // Set port B to output
 	PORTB = 0x00; // Init port B to 0s
-	TimerSet(1000);
+	TimerSet(100);
 	TimerOn();
 	
 	while(1) {

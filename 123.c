@@ -1,7 +1,7 @@
 /*      Author: TSZHIN LO CHRIS
  *  Partner(s) Name: VIK
  *      Lab Section: 23
- *      Assignment: Lab 6  Exercise 1
+ *      Assignment: Lab 6  Exercise 2
  *      Exercise Description: [optional - include for your own benefit]
  *
  *      I acknowledge all content contained herein, excluding template or example
@@ -79,6 +79,8 @@ void Loop(){
 
 	case One:
 	LED_State = Two;
+	if(PINA&&0X01)
+	 LED_State = wait1;
 	break;
 
 	case Two:
@@ -88,6 +90,27 @@ void Loop(){
 	case Three:
 	LED_State = One;
 	break;
+
+	case wait1:
+	 if(PINA==0x00)
+	   LED_State = Two;
+	 else
+	   LED_State = wait1;
+	break;
+
+	case wait2:
+         if(PINA==0x00)
+           LED_State = Three;
+         else
+           LED_State = wait2;
+        break;
+
+	case wait3:
+         if(PINA==0x00)
+           LED_State = One;
+         else
+           LED_State = wait3;
+        break;
 
 	default:
 	LED_State = Init;
@@ -111,6 +134,18 @@ void Loop(){
 	case Three:
 	PORTB = 0x04;
 	break;
+	
+	case wait1:
+        PORTB = 0x01; 
+        break;
+
+        case wait2:
+        PORTB = 0x02;
+        break;
+
+        case wait3:
+        PORTB = 0x03;
+        break;
 
 	default:
 	break;
@@ -121,9 +156,11 @@ void Loop(){
 
 
 int main(){
+	DDRA = 0x00;
+	PORTA = 0xFF;
 	DDRB = 0xFF; // Set port B to output
 	PORTB = 0x00; // Init port B to 0s
-	TimerSet(1000);
+	TimerSet(100);
 	TimerOn();
 	
 	while(1) {
