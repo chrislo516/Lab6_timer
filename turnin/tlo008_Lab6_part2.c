@@ -9,9 +9,8 @@
  */
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#ifdef _SIMULATE_
-#include "simAVRHeader.h"
-#endif
+//#include "simAVRHeader.h"
+
 volatile unsigned char TimerFlag = 0; // TimerISR() sets this to 1. Cprogrammer should clear to 0.
 
 // Internal variables for mapping AVR's ISR to our cleaner TimerISR model.
@@ -166,6 +165,7 @@ int main(){
 	Loop();
 	while (!TimerFlag); // Wait 1 sec
 	TimerFlag = 0;
+// Note: For the above a better style would use a synchSM with TickSM()
+// This example just illustrates the use of the ISR and flag
 	}
-	return 1;
 }
